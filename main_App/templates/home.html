@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<!-- 🔥 HERO SECTION -->
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        {% for banner in banners %}
+            <button type="button" data-bs-target="#bannerCarousel"
+                    data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}">
+            </button>
+        {% endfor %}
+    </div>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+        {% for banner in banners %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            
+            <div style="
+                height: 600px;
+                background-image: url('{{ banner.image.url }}');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-color : black;">
+                <!-- Optional Text -->
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class= "h5 " style = "color: gold">{{ banner.title }}</h5>
+                    <p>{{ banner.description }}</p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+
+
+   
+
+
+
+<!-- 💎 FEATURED DESIGNS -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Featured Designs</h2>
+    <div class="row">
+        {% for item in featured %}
+        <div class="col-md-4">
+            <div class="card shadow">
+                <img src="{{ item.image.url }}" class="card-img-top" style="height:250px; object-fit:cover;">
+                <div class="card-body text-center">
+                    <h5>{{ item.title }}</h5>
+                    <p>{{ item.category }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 👩‍🎨 ABOUT SHORT -->
+<div class="container mt-5 text-center">
+    <h2>{{ about.title }}</h2>  
+    <p>{{ about.descriptions|truncatewords:50  }}</p>
+    <a href="/about/" class="btn btn-dark">Read More</a>
+</div>
+
+<!-- 🛠️ SERVICES -->
+<div class="container mt-5">
+    <h2 class="text-center mb-5">Our Services</h2>
+
+    <div class="row">
+
+        {% for s in services %}
+        <div class="col-md-4 mb-4">
+
+            <div class="service-card text-center p-4 shadow rounded h-100">
+
+                <!-- Icon -->
+                <i class="bi {{ s.icon }} service-icon mb-3"></i>
+
+                <!-- Title -->
+                <h4>{{ s.name }}</h4>
+
+                <!-- Description -->
+                <p>{{ s.description }}</p>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+<!--shop-->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Our Latest Collection</h2>
+
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+
+                    <img src="{{ product.image.url }}" class="card-img-top"
+                         style="height:220px; object-fit:cover;">
+
+                    <div class="card-body text-center">
+                        <h5>{{ product.name }}</h5>
+                        <h6 class="text-warning">Rs. {{ product.price }}</h6>
+
+                        <a href="{% url 'add_to_cart' product.id %}" 
+                           class="btn btn-warning btn-sm mt-2">
+                           Add to Cart
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'shop' %}" class="btn btn-dark">
+                View All Products
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 📞 CALL TO ACTION -->
+<div class="container-fluid bg-dark text-white mt-5 p-5 text-center">
+    <h2>Get Your Dream Dress Today</h2>
+    <p>Contact us now for custom designs</p>
+    <a href="/contact/" class="btn btn-warning btn-lg">Contact Us</a>
+</div>
+
+{% endblock %}

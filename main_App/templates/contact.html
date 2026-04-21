@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section class="bg-dark text-white text-center py-3">
+    <div class="container">
+        <h2 class="h3 fw-bold mb-2">{{ brand_name }}</h2>
+        <p class="mb-3">{{ brand_slogan }}</p>
+        <a href="{% url 'services' %}" class="btn btn-warning btn-sm px-4">Our Services</a>
+    </div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-geo-alt-fill display-4 text-warning mb-3"></i>
+                <h5>Address</h5>
+                <p>123 Fashion Street, City, Country</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-telephone-fill display-4 text-warning mb-3"></i>
+                <h5>Phone</h5>
+                <p>+92 300 1234567</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-envelope-fill display-4 text-warning mb-3"></i>
+                <h5>Email</h5>
+                <p>info@example.com</p>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="card shadow p-4">
+                    <h4 class="mb-4 text-center">Send Us a Message</h4>
+                    <form method="POST" action="{% url 'contact' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" name="subject" class="form-control" id="subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea name="message" class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning btn-lg px-5">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

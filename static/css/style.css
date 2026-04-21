@@ -1,0 +1,56 @@
+
+.navbar-brand {
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: gold !important;
+    
+}
+
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+.shadow {
+    transition: 0.3s;
+}
+
+.shadow:hover {
+    transform: scale(1.03);
+}
+
+.bg-light {
+    transition: 0.3s;
+}
+
+.bg-light:hover {
+    transform: translateY(-5px);
+}
+
+.service-card {
+    background: #fff;
+    transition: 0.3s;
+    border-radius: 15px;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    background: #000;
+    color: #fff;
+}
+
+.service-icon {
+    font-size: 40px;
+    color: gold;
+}
+
+.service-card:hover .service-icon {
+    color: #fff;
+}

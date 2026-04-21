@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="https://wa.me/923111475632?text=I want to place an order" 
+   class="btn btn-success mt-3">
+   Order via WhatsApp
+</a>
+<div class="container py-5">
+    <h2>Checkout</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Your Name" class="form-control mb-3" required>
+        <input type="text" name="phone" placeholder="Phone" class="form-control mb-3" required>
+        <textarea name="address" placeholder="Address" class="form-control mb-3" required></textarea>
+
+        <button type="submit" class="btn btn-warning">Place Order</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Your Cart</h2>
+
+    {% if cart %}
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+
+        {% with grand_total=0 %}
+        {% for item in cart.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+
+            <td>
+                <a href="{% url 'update_cart' item.id 'decrease' %}" class="btn btn-sm btn-danger">-</a>
+                {{ item.quantity }}
+                <a href="{% url 'update_cart' item.id 'increase' %}" class="btn btn-sm btn-success">+</a>
+            </td>
+
+            <td>Rs. {{ item.total_price }}</td>
+
+            <td>
+                <a href="{% url 'remove_item' item.id %}" class="btn btn-sm btn-dark">Remove</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endwith %}
+    </table>
+     <h4 class="text-end">Total: Rs. {{ total }}</h4>
+    <a href="{% url 'checkout' %}" class="btn btn-warning">Checkout</a>
+
+    {% else %}
+        <p>Cart is empty</p>
+    {% endif %}
+   
+</div>
+{% endblock %}
